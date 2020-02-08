@@ -1,0 +1,12 @@
+apiVersion: v3
+kind: Pod
+metadata:
+  name: websphare
+  labels:
+    name: websphare
+spec:
+  containers:
+  - name: websphare
+    image: valunaik/websphare
+    ports:
+      - containerPort: 9080
