@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: websphare
+spec:
+  selector:
+    app: websphare
+  type: NodePort  
+  ports:
+  - name: http
+    port: 9080
+    NodePort: 9080
+    protocol: TCP
