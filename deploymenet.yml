@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websphare
+spec:
+  selector:
+    matchLabels:
+      app: websphare
+  template:
+    metadata:
+      labels:
+        app: websphare
+    spec:
+      containers:
+      - name: websphare
+        image: valunaik/websphare
+        ports:
+        - containerPort: 9080
