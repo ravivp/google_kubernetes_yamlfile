@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind:  Deployment
+metadata:
+  name: host-path
+spec:
+  replicas: 4
+  #minReadySeconds: 56
+  strategy:
+    type: RollingUpgrade
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: nginx
+      role: front-end    
+  template:
+    metadata:
+      labels:
+        app: nginx
+        role: front-end
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          resources:
+              limits:
+                cpu: "100m"
+                memory: "100Mi"
+          volumeMounts:
+            - mountPath: /test-mnt
+              name: test-volume 
+                    
+          ports:
+            - containerPort: 9080  
+      volumes:
+        - name: host-path
+          hostPath:
+              path: /test-volume                 
