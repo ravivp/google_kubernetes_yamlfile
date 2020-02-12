@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: websphare
+  name: nginx
 spec:
   selector:
-    app: websphare
+    app: nginx
+    role: front-end 
   type: LoadBalancer
   ports:
   - nodePort: 32000
-    port: 9080
-    targetPort: 9080
+    port: 80
+    targetPort: 80
     protocol: TCP

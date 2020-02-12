@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   name: websphare
 spec:
-  replicas: 4
-  minReadySeconds: 50
+  replicas: 3
+  minReadySeconds: 60
   strategy:
     type: RollingUpdate
     rollingUpdate:

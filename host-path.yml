@@ -6,7 +6,7 @@ spec:
   replicas: 4
   #minReadySeconds: 56
   strategy:
-    type: RollingUpgrade
+    type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
@@ -23,6 +23,8 @@ spec:
       containers:
         - name: nginx
           image: nginx
+          ports:
+            - containerPort: 9080
           resources:
               limits:
                 cpu: "100m"
@@ -30,10 +32,9 @@ spec:
           volumeMounts:
             - mountPath: /test-mnt
               name: test-volume 
-                    
-          ports:
-            - containerPort: 9080  
+          readOnly: false             
       volumes:
-        - name: host-path
+        - name: test-volume
           hostPath:
-              path: /test-volume                 
+              path: /test-volume
+              type: DirectoryOrCreate              
