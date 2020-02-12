@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websphare
+spec:
+  replicas: 4
+  minReadySeconds: 50
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: websphare
+  template:
+    metadata:
+      labels:
+        app: websphare
+    spec:
+      containers:
+      - name: websphare
+        image: valunaik/websphare
+        resources:
+          limits:
+            memory: "100Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 9080
